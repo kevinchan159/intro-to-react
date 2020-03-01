@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { incrementCounter, decrementCounter } from "../actions"
 import { AppState } from "../reducer"
 import { AppAction } from '../actionTypes';
+import Label from "./Label"
 import styled from 'styled-components'
 
 export interface CounterComponentState {
@@ -13,7 +14,7 @@ class CounterComponent extends React.Component<any, CounterComponentState> {
   constructor(props: any) {
     super(props)
     this.state = {
-      value: 1
+      value: 0
     }
   }
 
@@ -26,7 +27,7 @@ class CounterComponent extends React.Component<any, CounterComponentState> {
   }
 
   handleInputChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: parseInt(event.target.value) })
+    this.setState({ value: parseInt(event.target.value) || 0 })
   }
 
   render() {
@@ -36,6 +37,7 @@ class CounterComponent extends React.Component<any, CounterComponentState> {
         <input onChange={this.handleInputChanged}></input>
         <button onClick={this.handleIncrementBtnPressed}>Increment counter</button>
         <button onClick={this.handleDecrementBtnPressed}>Decrement counter</button>
+        <Label textToDisplay={`Current Input: ${this.state.value}`} />
       </Container >
     )
   }
